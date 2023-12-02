@@ -1,7 +1,9 @@
 import { useState } from "react";
 import ExpenseFilter from "./ExpenseFilter";
+import ExpenseForm from "./ExpenseForm";
 import ExpenseList from "./expenseList";
 
+export const categories = ['Groceries' , 'Utilities' , 'Entertainments']
 
 const App = () => {
 
@@ -12,7 +14,7 @@ const App = () => {
   id : 2},
   { description : "Entertainment",
   amount : 2,
-  category : "Entertainment",
+  category : "Entertainments",
   id : 4}
   ])
 
@@ -27,7 +29,7 @@ const App = () => {
   console.log(id)};
     if(visibleExpenses.length !== 0)
   return (
-    <>
+    <><ExpenseForm />
     <ExpenseFilter onSelectCategory={(category) => setCategory(category)} />
     <ExpenseList expenses={visibleExpenses} onDelete={deleteHandler} />
     </>
