@@ -4,9 +4,9 @@ import { z } from 'zod'
 import categories from './categories'
 
 
-// interface Props {
-//   onSubmit : () => void
-// }
+interface Props {
+  onSubmit : (data: formData) => void
+}
 const schema = z.object({
   description : z.string().min(3 , {message : "Description should br more than 3 words."}),
   amount : z.number(),
@@ -18,21 +18,25 @@ const schema = z.object({
 type formData = z.infer<typeof schema>;
 
 
-const ExpenseForm = () => {
+const ExpenseForm = ( {onSubmit} : Props) => {
   const {
     register ,
     handleSubmit,
+    reset,
     formState : {errors}
   } = useForm<formData>({resolver:zodResolver(schema)})
   return (
-    <form onSubmit={handleSubmit(data => console.log(data))} action="" >
+    <form onSubmit={handleSubmit(data => {
+      onSubmit(data)
+      reset()
+    })} action="" >
       <div className="mb-3">
         <label htmlFor="description" className="form-label">Description</label>
         <input {...register("description")} id='description' type="text" className="form-control" />
         {errors.description && <p>{errors.description.message}</p>}</div>
         <div className="mb-3">
         <label htmlFor="amount" className="form-label">Amount</label>
-        <input {...register("amount")} id='amount' type="number" className="form-control" />
+        <input {...register("amount" , {valueAsNumber: true })} id='amount' type="number" className="form-control" />
         {errors.amount && <p>{errors.amount.message}</p>}</div>
         <div className="mb-3">
           <label htmlFor="" className="form-label">Category</label>

@@ -29,7 +29,7 @@ const App = () => {
   console.log(id)};
     if(visibleExpenses.length !== 0)
   return (
-    <><ExpenseForm />
+    <><ExpenseForm onSubmit={expense => setExpenses([...expenses , {...expense , id: expenses.length+1 }]) } />
     <ExpenseFilter onSelectCategory={(category) => setCategory(category)} />
     <ExpenseList expenses={visibleExpenses} onDelete={deleteHandler} />
     </>
