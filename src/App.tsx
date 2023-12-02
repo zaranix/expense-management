@@ -3,7 +3,7 @@ import ExpenseFilter from "./ExpenseFilter";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseList from "./expenseList";
 
-export const categories = ['Groceries' , 'Utilities' , 'Entertainments']
+
 
 const App = () => {
 
